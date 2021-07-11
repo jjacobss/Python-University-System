@@ -1,0 +1,27 @@
+{% extends "universities/base.html" %}
+
+{% block page_header %}
+  <h2>Students</h2>
+{% endblock page_header %}
+
+{% block content %}
+
+<ul>
+  {% for student in students %}
+    <li>
+      <h3>
+        <a href="{% url 'students:student' student.id %}">{{student.name}} - {{student.year_in_school}} - {{student.major}} </a>
+      </h3>
+    </li>
+  {% empty %}
+    <li>
+      <h3>
+        No students have been added yet
+      </h3>
+    </li>
+  {% endfor %}
+</ul>
+<br>
+<h3><a href="{% url 'students:new_student'%}">Add a new student</a></h3>
+
+{% endblock content %}

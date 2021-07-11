@@ -1,0 +1,14 @@
+{% extends "universities/base.html" %}
+
+{% block content %}
+
+<p><a href="{% url 'students:student' student.id %}">{{ student }}</a></p>
+<p>Edit university:</p>
+
+<form action="{% url 'students:edit_student' student.id %}" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button name="submit">Save changes</button>
+</form>
+
+{% endblock content %}

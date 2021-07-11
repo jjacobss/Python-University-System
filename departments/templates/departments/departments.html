@@ -1,0 +1,28 @@
+{% extends "universities/base.html" %}
+
+{% block page_header %}
+  <h2>Departments</h2>
+{% endblock page_header %}
+
+{% block content %}
+
+
+<ul>
+  {% for department in departments %}
+    <li>
+      <h3>
+        <a href="{% url 'departments:department' department.id %}">{{department.name}} - {{department.university}}</a>
+      </h3>
+    </li>
+  {% empty %}
+    <li>
+      <h3>
+        No departments have been added yet
+      </h3>
+    </li>
+  {% endfor %}
+</ul>
+<br>
+<h3><a href="{% url 'departments:new_department'%}">Add a new department</a></h3>
+
+{% endblock content %}

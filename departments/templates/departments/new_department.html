@@ -1,0 +1,13 @@
+{% extends "universities/base.html" %}
+
+{% block content %}
+
+<p>Add a new department</p>
+
+<form action="{% url 'departments:new_department' %}" method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button name="submit">Add Department</button>
+</form>
+
+{% endblock content %}

@@ -1,0 +1,27 @@
+{% extends "universities/base.html" %}
+
+{% block page_header %}
+  <h2>Universities</h2>
+{% endblock page_header %}
+
+{% block content %}
+
+<ul>
+  {% for university in universities %}
+    <li>
+      <h3>
+        <a href="{% url 'universities:university' university.id %}">{{university}}</a>
+      </h3>
+    </li>
+  {% empty %}
+    <li>
+      <h3>
+        No universities have been added yet
+      </h3>
+    </li>
+  {% endfor %}
+</ul>
+<br>
+<h3><a href="{% url 'universities:new_university' %}">Add a new university</a></h3>
+
+{% endblock content %}

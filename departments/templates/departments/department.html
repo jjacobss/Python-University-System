@@ -1,0 +1,23 @@
+{% extends "universities/base.html" %}
+
+{% block content %}
+
+<div class="card mb-3">
+    <h2 class="card-header">{{ department.name }}</h2>
+    <h2 class="card-body">University: {{ department.university }}</h2>
+    <h3 class="card-body" style="padding-top: 0">Enrolled students:</h3>
+    {% for student in students %}
+        <h5 class="card-body" style="padding-top: 0">
+            <a href="{% url 'students:student' student.id %}">{{ student.name }} - {{ student.major }}</a></h5>
+    {% empty%}
+        <h5 class="card-body">No students are currently enrolled</h5>
+  {% endfor %}
+</div>
+<p>
+    <a href="{% url 'departments:edit_department' department.id %}"><button type="button" class="btn btn-primary">Edit Department</button></a>
+    <a href="{% url 'departments:delete_department' department.id %}"
+       onclick="return confirm('Are you sure you want to delete this department? This will delete all students associated with this department')">
+        <button type="button" class="btn btn-primary">Delete Department</button></a>
+</p>
+
+{% endblock content %}

@@ -1,0 +1,47 @@
+{% extends "universities/base.html" %}
+
+{% block page_header %}
+  <h2>{{ uni.name }}</h2>
+{% endblock page_header %}
+
+{% block content %}
+
+<ul>
+  {% for department in departments %}
+    <div class="card mb-3">
+        <h4 class="card-header"> {{ department.name }}
+            <small><a href="{% url 'departments:edit_department' department.id %}">Edit department</a></small>
+             </h4>
+            <h5 class="card-body" style="padding-top: 0" style="padding-bottom: 0">Enrolled Students:</h5>
+            {% for student in students %}
+                {% for s in student %}
+                    {% if s.major_department_id == department.id %}
+                      <h6 class="card-body" style="padding-top: 0">
+                          <a href="{% url 'students:student' s.id %}"> {{ s.name }} - {{ s.major }} </a>
+                      </h6>
+                    {% endif %}
+                {% endfor %}
+            {% empty%}
+                <h6 style="padding-top: 0">No students are currently enrolled</h6>
+            {% endfor %}
+    </div>
+  {% empty%}
+    <h4 class="card-header">No current departments</h4>
+  {% endfor %}
+</ul>
+
+{% if messages %}
+    {% for message in messages %}
+        {% if message.tags %}  <script>alert("{{ message }}")</script> {% endif %}
+    {% endfor %}
+{% endif %}
+
+<p>
+    <a href="{% url 'universities:edit_university' uni.id %}"><button type="button" class="btn btn-primary">Edit University</button></a>
+    <a href="{% url 'universities:export_university' uni.id %}"><button type="button" class="btn btn-primary">Export University</button></a>
+    <a href="{% url 'universities:delete_university' uni.id %}"
+       onclick="return confirm('Are you sure you want to delete this university? This will delete all departments and students associated with this university')">
+        <button type="button" class="btn btn-primary">Delete University</button></a>
+</p>
+
+{% endblock content %}

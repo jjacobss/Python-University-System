@@ -1,0 +1,18 @@
+{% extends "universities/base.html" %}
+
+{% block page_header %}
+
+  <div class="jumbotron">
+    <h1 class="display-3">University System 9000</h1>
+    <p class="lead">Are you tired of trying to keep track of all your universities, departments, and students?
+        Look no further than the University System 9000. We will keep track of everything so you don't have to</p>
+      <p class="small">JakeCorp cannot be held liable for any loss of life due to the University System 9000 gaining sentience</p>
+    {% if user.is_authenticated %}
+      <a class="btn btn-lg btm-primary" href="{% url 'universities:new_university' %}" role="button">Add a university &raquo;</a>
+    {% else %}
+      <a class="btn btn-lg btm-primary" href="{% url 'users:register' %}" role="button">Register &raquo;</a>
+      <a class="btn btn-lg btm-primary" href="{% url 'users:login' %}" role="button">Login &raquo;</a>
+    {% endif %}
+  </div>
+
+{% endblock page_header %}
