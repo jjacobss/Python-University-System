@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.http import Http404
 from .models import Student
@@ -17,7 +17,7 @@ def students(request):
 @login_required
 def student(request, student_id):
     """Show details on a specific student"""
-    student = Student.objects.get(id=student_id)
+    student = get_object_or_404(Student, id=student_id)
     # Check to make sure the student belongs to the current user
     if student.owner != request.user:
         raise Http404

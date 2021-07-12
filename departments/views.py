@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.http import Http404
 from .models import Department
@@ -18,7 +18,7 @@ def departments(request):
 @login_required
 def department(request, department_id):
     """Show details on a specific department"""
-    department = Department.objects.get(id=department_id)
+    department = get_object_or_404(Department, id=department_id)
     # Check to make sure the department belongs to the current user
     if department.owner != request.user:
         raise Http404

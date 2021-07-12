@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.http import Http404
 from django.contrib import messages
@@ -24,7 +24,7 @@ def universities(request):
 @login_required
 def university(request, university_id):
     """Show a specific university"""
-    uni = University.objects.get(id=university_id)
+    uni = get_object_or_404(University, id=university_id)
     # Check to make sure the university belongs to the current user
     if uni.owner != request.user:
         raise Http404
